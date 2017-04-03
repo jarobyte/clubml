@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(splines)\nlibrary(tidyverse)\nlibrary(modelr)\n\nx = c(-1000, -701,-600,-500,-400,-299,100, 1000, 3000)                        \ny = c(-1000,-901,-800,-500,-200,-99,100, 1000, 3000)\n\nsim <- tibble(x, y)\n\nmod <- lm(y ~ ns(x, 8), data = sim)\n\ngrid <- sim %>% \n  data_grid(x = seq_range(x, by = 1)) %>% \n  gather_predictions(mod, .pred = \"y\")\n\nggplot(sim, aes(x, y)) + \n  geom_point() +\n  geom_line(data = grid, colour = \"red\") +\n  facet_wrap(~ model)\n\nwrite_csv(grid, \"splineData.csv\")",
+    "created" : 1491248978154.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3365999207",
+    "id" : "12EFFC9",
+    "lastKnownWriteTime" : 1491250744,
+    "last_content_update" : 1491250744796,
+    "path" : "~/clubml/naturalSpline.R",
+    "project_path" : "naturalSpline.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
